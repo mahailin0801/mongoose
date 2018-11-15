@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="stylesheets/style.css" />
+		<script src="/javascripts/baiduTemplate.js"></script>
+		<script src="/javascripts/jquery.js"></script>
+	</head>
+	<body>
+		<a href="add.html">添加</a>&nbsp;&nbsp;&nbsp;
+		<a href="query.html">查找</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="register.html">注册</a>
+		&nbsp;&nbsp;&nbsp;
+		<a href="login.html">登录</a>
+		<div id="box">
+			
+		</div>
+		
+		<script type="text/html" id="tem">
+			<ul>
+				<%for(var i = 0; i < list.length;i++){%>
+					<li><%=list[i].name%></li>
+					<button data-id = "<%=list[i]._id%>" class="remove" >删除</button>
+					<button data-id = "<%=list[i]._id%>" class="modify" >编辑</button>
+				 <% }%>
+			</ul><br/>
+			<%for(var j = 1; j <= counts;j++){%> 
+				<span data-page="<%=j%>" class="pages"><%=j%></span>
+			<%}%>
+			
+		</script>
+	</body>
+	
+	<script>
+		//显示数据   /利用百度模板导入
+		/*$.get("http://localhost:3000/list").then((res)=>{
+			var count = baidu.template("tem",res);
+			$("#box").html(count);
+		})*/
+	</script>
+	
+	<script>
+		//分页
+		function getPageContent(page,pageSize){
+			$.get("/page/" + page + "/" + pageSize).then((res)=>{
+				var countent = baidu.template("tem",{
+					list:res.list,
+					counts:res.count
+				})
+				$("#box").html(countent);
+			})
+		}
+		getPageContent(1,3);
+		
+		$("#box").on("click",".pages",function(){
+			getPageContent($(this).attr('data-page'),3)
+		})
+	</script>
+	
+	<script>
+		//删除数据
+		$("#box").on("click",".remove",function(){
+			console.log(111);
+			if(!confirm("您确定要删除吗")) return;
+			$.get("http://localhost:3000/remove/" + $(this).attr("data-id")).then((res)=>{
+				if(res.ret){
+					location.reload();
+				}
+			})
+		})
+	</script>
+	
+	<script>
+		//修改数据
+		$("#box").on("click",".modify",function(){
+			location.href="/modify.html?id="+$(this).attr("data-id")
+		})
+	</script>
+	
+	
+</html>

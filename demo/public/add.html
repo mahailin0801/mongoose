@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="/javascripts/jquery.js"></script>
+		<script src="/javascripts/baiduTemplate.js"></script>
+	</head>
+	<body>
+		<input type="text" id="ads" />
+		<button id="btn">添加</button>
+		
+		<script>
+			$("#btn").click(function(){
+				$.get("http://localhost:3000/add/" + $("#ads").val()).then((res)=>{
+					if(res.ret){
+						location.href = "/list.html"
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

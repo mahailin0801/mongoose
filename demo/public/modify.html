@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="javascripts/jquery.js"></script>
+		<script src="javascripts/baiduTemplate.js"></script>
+	</head>
+	<body>
+			<input type="text" id="names"/>
+			<input type="hidden" id="id"/>
+			<button id="modify">编辑</button>
+	</body>
+	<script>
+		//获取问号传参的值
+		var id = location.search.substring(1).split("=")[1];
+		//请求数据显示
+		$.get("http://localhost:3000/modify/"+ id).then((res)=>{
+			$("#names").val(res[0].name),
+			$("#id").val(res[0]._id)
+		})
+		
+		
+		
+		//返回修改数据
+		$("#modify").click(function(){
+			$.get("http://localhost:3000/modifyok/"+$("#id").val()+"/"+$("#names").val()).then((res)=>{
+				if(res.ret){
+					location.href ="/list.html"
+				}
+			})
+		})
+		
+	</script>
+</html>

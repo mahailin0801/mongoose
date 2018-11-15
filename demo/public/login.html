@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		用户名：<input type="text" id="oName"/><br/><br/>
+		密    码：<input type="password" id="pwd"/><br/><br/>
+		<input type="button" id="login" value="登录"/>
+		<div id="info"></div>
+	</body>
+</html>
+<script src="javascripts/jquery.js"></script>
+<script>
+	$("#login").click(function(){
+	 	$.post("/users/login",{
+	 	 	username:$("#oName").val(),
+	 	 	pasword:$("#pwd").val()
+	 	}).then((res)=>{
+ 	 		if(res.data){
+ 	 			location.href = "/list.html"
+ 	 		}
+ 	 		else{
+ 	 			$("#info").html("登录失败")
+ 	 		}
+	 	})
+	 })
+</script>

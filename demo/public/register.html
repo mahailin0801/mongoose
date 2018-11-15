@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		用户名：<input type="text" id="oName"/><br/><br/>
+		密    码：<input type="password" id="pwd"/><br/><br/>
+		<input type="button" id="reg" value="注册"/>
+		<div id="info"></div>
+	</body>
+</html>
+<script src="javascripts/jquery.js"></script>
+<script>
+	$("#reg").click(function(){
+	 	$.post("/users/register",{
+	 	 	username:$("#oName").val(),
+	 	 	pasword:$("#pwd").val()
+	 	}).then((res)=>{
+ 	 		if(res.ret){
+ 	 			$("#info").html("注册成功");
+ 	 		}
+ 	 		else{
+ 	 			$("#info").html("注册失败")
+ 	 		}
+	 	})
+	 })
+</script>

@@ -1,0 +1,38 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+	font-size: 18px;
+	color: cadetblue;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+#box{
+	width: 200px;
+	height: auto;
+	background: aliceblue;
+	margin-left: 20px;
+	border: 1px solid #00B7FF;
+	margin-bottom: 10px;
+}
+
+#box ul li{
+	height: 20px;
+	font-size: 16px;
+}
+
+span{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 16px;
+	border: 1px solid #00B7FF;
+	margin-right: 2px;
+	float: left;
+	cursor: pointer;
+}

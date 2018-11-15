@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="stylesheets/style.css" />
+		<script src="/javascripts/jquery.js"></script>
+		<script src="/javascripts/baiduTemplate.js"></script>
+	</head>
+	<body>
+		<input type="text" id="search"/>
+		<button id="query">查找</button>
+		<div id="box">
+			
+		</div>
+	</body>
+	<script type="text/html" id="tem">
+		<ul>
+			<%for(var i = 0; i < list.length;i++){%>
+				<li><%=list[i].name%></li>
+			<% } %>
+		</ul>
+	</script>
+	<script>
+	//查找
+		$("#query").click(function(){
+			$.get("http://localhost:3000/query/" + $("#search").val()).then((res)=>{
+				var count = baidu.template("tem",res);
+				$("#box").html(count);
+			})
+		})
+	</script>
+</html>
